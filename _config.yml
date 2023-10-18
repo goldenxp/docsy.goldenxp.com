@@ -14,30 +14,30 @@
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
 
-title: Docsy Jekyll
-email: your-email@domain.com
-author: Dinosaur Avocado
+title: goldenxp.com docs
+email: sunder@goldenxp.com
+author: Sunder Iyer
 description: > # this means to ignore newlines until "baseurl:"
   Write an awesome description for your new site here. You can edit this
   line in _config.yml. It will appear in your document head meta (for
   Google search results) and in your feed.xml site description.
 
 # Add your baseurl here (your repository) but DO NOT CHANGE THE LINE NUMBER without editing .circleci/circle_urls.sh
-baseurl: "/docsy-jekyll" # the subpath of your site, e.g. /blog
+baseurl: "" # the subpath of your site, e.g. /blog
 
 # This is mostly for testing
-url: "https://vsoch.github.io" # the base hostname & protocol for your site
+url: "https://docs.goldenxp.com" # the base hostname & protocol for your site
 
 # Social (First three Required)
-repo: "https://github.com/vsoch/docsy-jekyll"
-github_user: "vsoch"
-github_repo: "docsy-jekyll"
-github_branch: "master"
+repo: "https://github.com/goldenxp/docsy.goldenxp.com"
+github_user: "goldenxp"
+github_repo: "docsy.goldenxp.com"
+github_branch: "main"
 
 # Optional
-twitter: vsoch
-linkedin: vsochat
-dockerhub: vanessa
+twitter: goldenxp
+linkedin: goldenxp
+# dockerhub: name
 
 # These options are used to configure the locations of your version history when you want to serve versioned documents
 version_params:
@@ -91,7 +91,7 @@ exclude: [_site, CHANGELOG.md, LICENSE, README.md, vendor]
 collections:
   docs:
     output: true
-    permalink: /:collection/:path
+    permalink: /:path
 
 # Defaults
 defaults:
