@@ -5,17 +5,17 @@
       url: "houdini/nodes"
       children:
         - title: SOP
-          url: "houdini/nodes/SOP"
+          url: "houdini/nodes/sop"
         - title: OBJ
-          url: "houdini/nodes/OBJ"
+          url: "houdini/nodes/obj"
         - title: ROPs
-          url: "houdini/nodes/OUT"
+          url: "houdini/nodes/out"
         - title: VEX
-          url: "houdini/nodes/VEX"
+          url: "houdini/nodes/vex"
         - title: VOP
-          url: "houdini/nodes/VOP"
+          url: "houdini/nodes/vop"
         - title: SHOP
-          url: "houdini/nodes/SHOP"
+          url: "houdini/nodes/shop"
     - title: Scaleform
       url: "scaleform"
     - title: "Unreal"
