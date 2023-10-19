@@ -1,25 +1,22 @@
-- title: Documentation
+- title: Docs
   url: docs
   links:
-    - title: "Getting Started"
-      url: "docs/getting-started"
+    - title: "Houdini Nodes"
+      url: "houdini/nodes"
       children:
-        - title: Features
-          url: "docs/getting-started#getting-started"
-        - title: Development
-          url: "docs/getting-started#development"
-        - title: Customization
-          url: "docs/getting-started#customization"
-    - title: Versioning
-      url: "docs/versioning"
-    - title: "About"
-      url: "about"
-    - title: "News"
-      url: "news"
-- title: "Extras"
-  url: "docs/extras"
-  links:
-    - title: Quizzes
-      url: "docs/extras/example-quiz"
-    - title: Tags Page
-      url: "tags"
+        - title: SOP
+          url: "houdini/nodes/SOP"
+        - title: OBJ
+          url: "houdini/nodes/OBJ"
+        - title: ROPs
+          url: "houdini/nodes/OUT"
+        - title: VEX
+          url: "houdini/nodes/VEX"
+        - title: VOP
+          url: "houdini/nodes/VOP"
+        - title: SHOP
+          url: "houdini/nodes/SHOP"
+    - title: Scaleform
+      url: "scaleform"
+    - title: "Unreal"
+      url: "unreal"
