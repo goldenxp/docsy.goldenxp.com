@@ -16,5 +16,5 @@ More info can be found on the [official website](https://www.inklestudios.com/in
 While reading the official documentation, you might get overwhelmed by Inkle's unique terms and concepts. Despite being called Ink, it is less about text fluid and more closely related to its creator's namesake i.e. Inkle. An inkle is a narrow linen tape often used to make shoelaces. Hopefully knowing this makes lingo like knots and threads a little less confusing.  
 
 ## Prototypes
-* [Metroidvania Pacing Charts in Ink](metroidvania)
+* [Metroidvania Pacing Charts in Ink](ink/metroidvania)
 
