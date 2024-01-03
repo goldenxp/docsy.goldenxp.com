@@ -1,6 +1,12 @@
 - title: Docs
   url: docs
   links:
+    - title: "Ink"
+      url: "ink"
+    - title: "Unreal"
+      url: "unreal"
+    - title: Scaleform
+      url: "scaleform"
     - title: "Houdini Nodes"
       url: "houdini/nodes"
       children:
@@ -16,7 +22,3 @@
           url: "houdini/nodes/vop"
         - title: SHOP
           url: "houdini/nodes/shop"
-    - title: Scaleform
-      url: "scaleform"
-    - title: "Unreal"
-      url: "unreal"
