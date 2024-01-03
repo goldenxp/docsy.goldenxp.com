@@ -3,7 +3,7 @@ title: Ink
 tags: 
  - ink
  - gamedev
-description: Ink
+description: Ink Documentation
 ---
 
 # Ink
@@ -17,4 +17,5 @@ While reading the official documentation, you might get overwhelmed by Inkle's u
 
 ## Prototypes
 * [Metroidvania Pacing Charts in Ink]({{ site.baseurl }}/ink/metroidvania)
+* [Ink Numeric Input]({{ site.baseurl }}/ink/numericinput)
 
