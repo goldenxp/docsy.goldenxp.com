@@ -104,7 +104,7 @@ It is possible to use Regular Expressions to convert different parts of JSON dat
 -> DONE
 ```
 
-Note that while MVPC supports spaces in its Area names, Ink does not support spaces in Knot names. Underscores are officially recommended instead of spaces but you _could_ also remove the spaces for Pascal Case. 
+Note that while MVPC supports spaces in its Area names, Ink does not support spaces in Knot names. Underscores are officially recommended instead of spaces but you _could_ also remove the spaces for PascalCase. 
 
 ### 🗝️Items
 Items (and Currencies) can be expressed using Ink variables. You could define a variable for each item or even make use of Ink Lists. However, while writing Organic in Ink, it became apparent that using just variables was cumbersome because of complex item retrieval. For example, if you could find the same item or currency in multiple places, you would need to re-write similar logic in multiple knots. Therefore, I determined that variables are not enough and instead [Tunnels](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#1-tunnels) should be used. The tunnel will allow us to get items from any knot, potentially performing extra action and eventually return to the original knot. Another advantage of using Tunnels is that if an Item is permanent (i.e. it cannot be lost once gained which is supposed to be the normal use case), we can skip using a unique variable and use the tunnel's knot address for condition checking.
