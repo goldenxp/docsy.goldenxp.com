@@ -148,7 +148,8 @@ Time to drive.
 It's possible to take a combination of the above techniques and make something more robust. 
 * Lists can be used for tracking locations and location relationships
 * Knot parameters can be used for defining location properties
-* Threads can generate dynamic sets of choices based on custom rules. 
+* Threads can generate dynamic sets of choices based on custom rules.
+
 To conclude, it's possible to build a usable map in Ink and have your player travel from point to point, giving the impression of a living world.
 
 
