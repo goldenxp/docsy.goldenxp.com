@@ -89,7 +89,7 @@ Ah, Oakland. Time for some good BBQ!
 { TURNS_SINCE(-> SF.Oakland_via_BART) == 0 : After riding the BART, I need some! }
 -> DONE
 ```
-As mentioned in the official Ink docs, `TURNS_SINCE(-> name) == 0` is a common check and is often made into a helper function `came_from`. It may not hurt to do the same here and call it something like `via(-> name)`. You could use just the stitch address i.e. just `{ SF.Oakland_via_BART} `  but that may not work as intended, especially if you can navigate back and forth between locations. It would test the number of uses as opposed to if it was just used prior. 
+As mentioned in the official Ink docs, `TURNS_SINCE(-> name) == 0` is a common check and is often made into a helper function `came_from`. It may not hurt to do the same here and call it something like `via(-> name)`. You could use just the stitch address i.e. just `{SF.Oakland_via_BART}` but that may not work as intended, especially if you can navigate back and forth between locations. It would test the number of uses as opposed to if it was just used prior. 
 
 ## Managing Routes
 Route management can be driven by many rules. If these rules universally apply to all locations, we can use knot parameters and Ink [Threads](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#2-threads) to assemble our route choices dynamically.
@@ -145,6 +145,10 @@ Time to drive.
 ``` 
 
 ## Conclusion
-It's possible to take a combination of the above techniques and make something more robust. Lists can be used for tracking locations and location relationships, knot parameters can be used for defining location properties and threads can generate dynamic sets of choices based on custom rules. This way it's possible to build a usable map in Ink and have your player travel from point to point, giving the impression of a living world.
+It's possible to take a combination of the above techniques and make something more robust. 
+* Lists can be used for tracking locations and location relationships
+* Knot parameters can be used for defining location properties
+* Threads can generate dynamic sets of choices based on custom rules. 
+To conclude, it's possible to build a usable map in Ink and have your player travel from point to point, giving the impression of a living world.
 
 
