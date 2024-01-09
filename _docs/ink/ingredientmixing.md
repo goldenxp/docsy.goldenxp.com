@@ -73,7 +73,7 @@ Top off with milk
 Now our creations and the recipe outcomes are both concatenated strings. This way we can enforce order and allow duplicates in our comparisons. Note that we could also use numbers through list values but we would be limited to 10 ingredients or otherwise have to rely on more complicated math. 
 
 ## Mixing Choices
-Instead of scripting the addition of ingredients, we will now offer them up as choices to the user. We'll first use a loop to provide all ingredients as choices. We'll need the pop function which is available in Inky's Ink menu under List handling. Then we'll loop with a labelled gather and output a choice with a thread and knot. The code below outputs a sticky choice for every ingredient.
+Instead of scripting the addition of ingredients, we will now offer them up as choices to the user. We'll first use a loop to provide all ingredients as choices. We'll need the pop function which is available in Inky's Ink menu under List handling. This function removes the smallest value from a list which in a loop enables list iteration. We'll loop with a labelled gather and output a choice for each list element using a thread and knot. Basically, the code below outputs a sticky choice for every ingredient.
 
 ```
 ~ temp all = LIST_ALL(ingredients) // Get a list with all ingredients
@@ -87,6 +87,11 @@ Instead of scripting the addition of ingredients, we will now offer them up as c
 === make_choice(ingredient)
 + [Add {ingredient}]
 -> DONE
+
+=== function pop(ref _list) 
+    ~ temp el = LIST_MIN(_list) 
+    ~ _list -= el
+    ~ return el 
 ```
 
 > Add coffee
