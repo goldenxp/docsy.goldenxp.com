@@ -21,6 +21,7 @@ While reading the official documentation, you might get overwhelmed by Inkle's u
 * [Ink Text Logs]({{ site.baseurl }}/ink/log)
 * [Making a World Map in Ink]({{ site.baseurl }}/ink/worldmap)
 * [Mixing Ingredients in Ink]({{ site.baseurl }}/ink/ingredientmixing)
+* [Running Inky on a Chromebook]({{ site.baseurl }}/ink/inkychromebook)
 
 ## Lingo
 
