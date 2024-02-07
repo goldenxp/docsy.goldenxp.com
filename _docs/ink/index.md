@@ -22,6 +22,7 @@ While reading the official documentation, you might get overwhelmed by Inkle's u
 * [Making a World Map in Ink]({{ site.baseurl }}/ink/worldmap)
 * [Mixing Ingredients in Ink]({{ site.baseurl }}/ink/ingredientmixing)
 * [Running Inky on a Chromebook]({{ site.baseurl }}/ink/inkychromebook)
+* [Prototyping a Card Swiping Game in Ink]({{ site.baseurl }}/ink/cardswiping)
 
 ## Lingo
 
