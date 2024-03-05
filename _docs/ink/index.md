@@ -24,6 +24,7 @@ While reading the official documentation, you might get overwhelmed by Inkle's u
 * [Running Inky on a Chromebook]({{ site.baseurl }}/ink/inkychromebook)
 * [Prototyping a Card Swiping Game in Ink]({{ site.baseurl }}/ink/cardswiping)
 * [Mapping a PAD Model in Ink]({{ site.baseurl }}/ink/padmodel)
+* [Ink Text Generation with Context-Free Grammar]({{ site.baseurl }}/ink/contextfreegrammar)
 
 ## Lingo
 
