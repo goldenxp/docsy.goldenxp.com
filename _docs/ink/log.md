@@ -18,7 +18,7 @@ It got me thinking about how to reproduce something like the game's Journal in I
 ## Accessing the Log
 Let's solve the simpler problem first: how to make an accessible yet separate list of text entries i.e. the log. We will assume we're **not** using a game engine and are just working in pure Ink. This means the opening of the log needs to be a choice (aka [options](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#2-choices)) offered to the player when choices are possible. Also, the log will need some way of returning to same set of choices. We will need to employ [Tunnels](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#1-tunnels) to "enter" and "exit" the log which will need its own Knot. Each choice set will need to be a stitch and will also contain an "extra" sticky choice that holds the tunnel to the log. The result would look like this.
 
-```
+```ink
 The alarm clock rang.
 ->choice1
 =choice1
@@ -45,7 +45,7 @@ Now for the juicier part, collecting text entries for the log. It's juicy becaus
 
 ### Method 1: Simple List
 If the log is static and linear, perhaps for something like a kinetic novel (no branching), making a list of text entries in Ink is actually a trivial affair. You would use a variable to keep track of how much of the log was unlocked and only display the necessary text entries.
-```
+```ink
 VAR log_index = 0
 === log
 Opening Log. Index is {log_index}
@@ -62,7 +62,7 @@ The above (and any similar variations) would only work if our journal was pretty
 ### Method 2: String Concatenation
 What is a string but an array of characters. You could just make the log a string and append strings to it.
 
-```
+```ink
 VAR log_entries = ""
 
 Groundhog Dazed 
@@ -102,7 +102,7 @@ This works but despite its flexibility, I won't say it's excellent. For one, you
 
 ### Method 3: Using Ink Lists
 Ink [Lists](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#1-basic-lists) are their own special beast. If our log entries are ordered and do not repeat, using Ink Lists is a great way to go because it can lead to richer features. The code below makes a list and only shows specific text entries if the values are found in the list. The values are toggled on with the `+=` operator and we check if they're active using the `?` operator.
-```
+```ink
 LIST logs = n1, n2, n3, n4, n5, n6
 
 ~ logs += n1    // flip n1 on
@@ -152,7 +152,7 @@ The above output is
 
 Because lists are both variables and boolean sets,  we can do a lot with them. For example, we can make a new `log` list variable to keep track of new states on the text entries. Below, we create an unread status and add an option to "read" all available entries. 
 
-```
+```ink
 LIST logs = n1, n2, n3, n4, n5, n6
 
 // declare the list for unread logs

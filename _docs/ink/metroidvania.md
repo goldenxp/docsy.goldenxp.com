@@ -23,7 +23,7 @@ In the past, I used MVPC to prototype an ambitious game called Organic. It was n
 
 Organic is too complex for tutorialization so I made a new chart called King Castle for this purpose. The exported JSON looks like this after I prettified it for better reading. 
 
-```json
+```
 {
     "areas": [
         {
