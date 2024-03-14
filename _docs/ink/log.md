@@ -5,6 +5,8 @@ tags:
 description: How to display a text log (e.g. journal) in Ink
 ---
 
+{% include ink.html %}
+
 # Ink Text Logs
 Learn one method of setting up a log of text entries
 
