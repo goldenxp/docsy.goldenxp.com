@@ -5,6 +5,8 @@ tags:
 description: How to define ingredients and combine them in Ink
 ---
 
+{% include ink.html %}
+
 # Mixing Ingredients in Ink
 This article shows how to make a simple recipe system 
 
@@ -18,7 +20,7 @@ There are two problems to address to make this work in Ink. One is to provide a 
 ## Defining and Validating Ingredients
 We'll define Ingredients using Lists. Lists in Ink are not arrays but sets of on/off variables that can each have a numeric value. When we assign each list entry to an ingredient, their combinations can be used to define recipes.
 
-```
+```ink
 LIST ingredients = coffee, tea, milk, honey, cocoa
 
 VAR dirty_chai = (coffee, tea, milk)
@@ -39,7 +41,7 @@ In the Ink snippet above, list variables can be used for "adding" ingredients an
 
 Unfortunately, this method does not work if your recipes have duplicates or if the order matters. As it so happens, Coffee Talk recipes do allow duplicates and the order in which ingredients are added does change the outcome. Lists don't support duplicates; the entry is in the list variable or it's not. We also cannot check for sequences because lists sort based on the values set when the list is defined. The variable order in variables made from lists does not matter so we can't use this to enforce a specific sequence. The workaround to both these problems is to use strings instead. To pull this off, we would need a function that "converts" a list variable into a string.
 
-```
+```ink
 LIST ingredients = coffee, tea, milk, honey, cocoa
 
 CONST UNSET = ""
@@ -75,7 +77,7 @@ Now our creations and the recipe outcomes are both concatenated strings. This wa
 ## Mixing Choices
 Instead of scripting the addition of ingredients, we will now offer them up as choices to the user. We'll first use a loop to provide all ingredients as choices. We'll need the pop function which is available in Inky's Ink menu under List handling. This function removes the smallest value from a list which in a loop enables list iteration. We'll loop with a labelled gather and output a choice for each list element using a thread and knot. Basically, the code below outputs a sticky choice for every ingredient.
 
-```
+```ink
 ~ temp all = LIST_ALL(ingredients) // Get a list with all ingredients
 - (loop)
   ~ temp item = pop(all)
@@ -106,7 +108,7 @@ Instead of scripting the addition of ingredients, we will now offer them up as c
 
 We need these choices to do something, specifically adding the selected ingredient to our "container" variable; we can route this through using references. We also need the choices to divert to a knot or stitch that will symbolize the next step in our combination process. We will also pass this through using parameters. 
 
-```
+```ink
 ~ temp creation = "" // where we add our ingredients
 ~ temp all = LIST_ALL(ingredients) // Get a list with all ingredients
 - (loop)
@@ -130,7 +132,7 @@ We're done!
 
 Next we need to present the choices multiple times. Some games allow only two-item combinations but here we need to support three. Giving the ingredient loop its own knot let's us re-use it easily to present the ingredient choices as well as set the next step. Since we combine three items to create our stuff, we'll just make stitches for each combination step. Dynamic recipes may need to rely on loops but that's out of scope for this document.
 
-```
+```ink
 ~ temp creation = "" // where we add our ingredients
 -> first
 = first
@@ -171,7 +173,7 @@ We're done!
 This is a solid start but there's more that can be done.
 
 For one, list variables are bound by variable naming rules so we can't use spaces. We may want to make a new function to output a user-facing name as well as a combination key.
-```
+```ink
 === make_choice(ref cup, ingredient, -> next)
 + [Add {prettyname(ingredient)}] // Display choice using ingredient
 // other stuff
@@ -187,7 +189,7 @@ For one, list variables are bound by variable naming rules so we can't use space
 
 Putting the step stitches into a knot would allow it to be re-used as well. When generating choices, we may want to add the ability to restart, so having that knot would help us reset the `creation` variable and start at the first step again. 
 
-```
+```ink
 === brew_process
 creation = UNSET
 -> first

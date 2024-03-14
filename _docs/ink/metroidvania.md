@@ -5,6 +5,8 @@ tags:
 description: How to port JSON from Metroidvania Pacing Chart to Ink
 ---
 
+{% include ink.html %}
+
 # Metroidvania Pacing Chart in Ink
 Learn how to ink-ify exported designs from the Metroidvania Pacing Chart tool 
 
@@ -93,7 +95,7 @@ Areas in MVPC are rooms or levels. They are supposed to be critical to the playe
 
 It is possible to use Regular Expressions to convert different parts of JSON data directly to Ink which is what I had to do for Organic. It may also be possible to create a script that does the same. In this case, we can just pull up Inky and write the following to define all Areas in the chart.
 
-```
+```ink
 === Home
 -> DONE
 
@@ -109,7 +111,7 @@ Note that while MVPC supports spaces in its Area names, Ink does not support spa
 ### 🗝️Items
 Items (and Currencies) can be expressed using Ink variables. You could define a variable for each item or even make use of Ink Lists. However, while writing Organic in Ink, it became apparent that using just variables was cumbersome because of complex item retrieval. For example, if you could find the same item or currency in multiple places, you would need to re-write similar logic in multiple knots. Therefore, I determined that variables are not enough and instead [Tunnels](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#1-tunnels) should be used. The tunnel will allow us to get items from any knot, potentially performing extra action and eventually return to the original knot. Another advantage of using Tunnels is that if an Item is permanent (i.e. it cannot be lost once gained which is supposed to be the normal use case), we can skip using a unique variable and use the tunnel's knot address for condition checking.
 
-```
+```ink
 // Normal Method
 // VAR crown = false
 // === get_crown
@@ -125,7 +127,7 @@ You have earned the Crown!
 
 So using this method, each item will have its own knot. For a currency, it may not hurt to use two for gaining and losing value. The following is from Organic.
 
-```
+```ink
 VAR credit = 0
 // . . .
 ===GetCredit(amount)
@@ -140,7 +142,7 @@ VAR credit = 0
 ### 🕛Events
 For similar reasons, Events also need to be tunnels to maintain flexibility. Events can be toggled on and off and can be used to lock or unlock items or even other events! An Event can be forced to toggle once by locking itself too. In King Castle however none of these features are utilized and so Events in this example can just be a simple tunnel with no corresponding variable. 
 
-```
+```ink
 === Conquered_All
 You have defeated everyone.
 You can now pick up a reward.
@@ -150,7 +152,7 @@ You can now pick up a reward.
 ### 🛣️Roads
 MVPC's Roads are an Interaction that lets you setup a relationship between two Areas. Roads can be one way or bi-directional too. We can use Ink [Choices](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#2-choices) (aka Options) and [Diverts](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#4-diverts) to setup Roads. The choices must be sticky to allow back and forth navigation. To test in Inky, you'll need to go to start area immediately which can be accomplished with an initial divert. 
 
-```
+```ink
 -> Home
 === Home
 You are at the start area.
@@ -179,7 +181,7 @@ Similarly, we can lock item pickup or events with conditions but we need to add 
 ### 🎬Actions
 Similar to moving along roads, interactions for items and events will use choices. However, these choices will need to be non-sticky so that they can only be done once. It's also possible to make them sticky and use conditions but this is not necessary in this case. 
 The choices will enter the tunnel and exit back to the Arena. This is so that the choices can be refreshed and reused. 
-```
+```ink
 You are at the fighting place.
 * [Conquer them All!] -> Conquered_All -> Arena
 * {Conquered_All} [Get Reward] -> get_crown -> Arena
@@ -187,7 +189,7 @@ You are at the fighting place.
 ```
 
 All JSON data has been reflected in Ink now and this is the final result with comments stripped out.
-```
+```ink
 -> Home
 === Home
 You are at the start area.
@@ -245,7 +247,7 @@ It is possible consolidate some interactions in Ink that may not be necessary. F
 
 ### •Avoiding Repeated Text
 Using tunnels means we return to the knot and the initial text is reshown which is odd. If you look at the sample output, "You are at the fighting place" is displayed three times. There are a few ways of solving this issue but I think the simplest one is to use a [Stitch](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#6-includes-and-stitches). The stitch can be used to separate the Area description from the possible actions. The tunnel can redirect to the stitch instead of the knot.
-```
+```ink
 === Arena
 You are at the fighting place.
 -> Menu
@@ -257,7 +259,7 @@ You are at the fighting place.
 
 ### •Grounding the Navigation
 Complex maps with multiple routes can get confusing in pure text. It helps to contextualize by tracking the previous Area. One way of doing this is with the TURNS_SINCE which checks for when we last hit up a knot. This can be used to determine if we came from a specific Area. We can use this in a condition cto change some text to help ground where the player is.
-```
+```ink
 + [Go { TURNS_SINCE(-> Arena) == 1 : back } to Arena] -> Arena
 ```
 The above will show the word "back" if the last room we visited was the Arena. 

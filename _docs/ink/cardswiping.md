@@ -5,6 +5,8 @@ tags:
 description: Possible approaches to making a strategy game like Reigns in Ink
 ---
 
+{% include ink.html %}
+
 # Prototyping a Card Swiping Game in Ink
 This document will go over two methods of building a card strategy game similar to Reigns. 
 
@@ -16,7 +18,7 @@ Because Ink is a robust language, it is possible to build a similar game (sans s
 ## Cards as Knots
 The heart of this method is to capture the narrative and outcome of each card in a single knot. Then, a primary knot "deals" the cards by diverting to the card knots. In the skeletal example below, the `DRAW_CARD` knot picks cards at random and the `CARD_1` knot has two options (aka [choices](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#2-choices) which are proxies of swiping left or right. When an option is selected, we [gather](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#1-gathers) and return to `DRAW_CARD` and this captures our game loop. 
 
-```
+```ink
 -> DRAW_CARD
 === DRAW_CARD
 ~ temp card = RANDOM(1,2)
@@ -35,7 +37,7 @@ Flavor text
 ```
 
 Here's the fleshed out version of the above example.
-```
+```ink
 VAR MIL = 50
 VAR PPL = 50
 VAR REL = 50
@@ -97,7 +99,7 @@ There are two parts to this. The first is the use of lists which affords the cre
 
 The second part involves the use of threads to output a knot based on parameter values. Each list item maps to a knot invocation which displays the text/options and handles choice outcomes. This is what it could look like. 
 
-```
+```ink
 LIST all_cards = donate, marry, taxes, hard1, hard2, hard3
 VAR set1 = (donate, marry, taxes)
 
@@ -125,7 +127,7 @@ VAR set1 = (donate, marry, taxes)
 
 And below is a version of the above that's a bit more functional.
 
-```
+```ink
 LIST all_cards = donate, marry, taxes, hard1, hard2, hard3
 VAR set1 = (donate, marry, taxes)
 

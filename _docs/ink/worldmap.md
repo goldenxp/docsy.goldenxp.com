@@ -5,6 +5,8 @@ tags:
 description: How to build locations and routes in Ink
 ---
 
+{% include ink.html %}
+
 # Making a World Map in Ink
 Learn how to setup locations and routes in Ink
 
@@ -13,7 +15,7 @@ This document will demonstrate one way of making a navigable world map in Ink.
 
 There are a few approaches one can take. For example, one can use variables for tracking locations and destinations. Choices can modify variables to change the current location and different content can be used per variable value. With the help of powerful Ink Lists, this approach can be taken further. 
 
-```
+```ink
 LIST cities = SF, Oakland, Fremont, Sunnyvale
 
 VAR current_city = SF
@@ -36,7 +38,7 @@ This approach can work if the locations have minimal differences but once the lo
 
 ## Locations as Knots
 The "knots are locations" approach uses the content in a knot to describe the location and determine possible events at those locations. Diverts can be used to route to other location knots. Choices and conditions can be used to define which routes the player can take. 
-```
+```ink
 -> SF
 ===SF
 SF is nice but let me explore other cities! Where should I go?
@@ -59,7 +61,7 @@ Yahoo! I'm in Sunnyvale!
 The above method allows each location to have its own content, possible routes and content for the route itself. In the example, the content between the option and the divert describes the journey of the current location to the next one. 
 
 In case routing gets more complex, it might be necessary to make route content their own stitches. Different methods of traveling are introduced below.
-```
+```ink
 -> SF
 ===SF
 + [BART to Oakland]  -> Oakland_via_BART
@@ -83,7 +85,7 @@ Ah, Oakland. Time for some good BBQ!
 ```
 
 Since the routes are now stitches, diversion is clearer and they can also be tracked with `knot_name.stitch_name`. Continuing from the above Ink snippet, the following can be used to test how the journey could have happened. 
-```
+```ink
 === Oakland
 Ah, Oakland. Time for some good BBQ!
 { TURNS_SINCE(-> SF.Oakland_via_BART) == 0 : After riding the BART, I need some! }
@@ -93,7 +95,7 @@ As mentioned in the official Ink docs, `TURNS_SINCE(-> name) == 0` is a common c
 
 ## Managing Routes
 Route management can be driven by many rules. If these rules universally apply to all locations, we can use knot parameters and Ink [Threads](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#2-threads) to assemble our route choices dynamically.
-```
+```ink
 -> SF
 === SF
 I'm in SF now.
@@ -114,7 +116,7 @@ Time to drive.
 }
 ```
 Invoking `make_route` is a way to define properties in each knot location. These can be used to generate a choice based on custom rules. For example, we can add fuel as a variable and specify fuel costs everytime we invoke the knot. This cost can then be used to modify how a route could take place.
-```
+```ink
 VAR fuel = 10
 
 -> SF

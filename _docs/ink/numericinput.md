@@ -5,6 +5,8 @@ tags:
 description: How to allow numeric input in Ink
 ---
 
+{% include ink.html %}
+
 # Ink Numeric Input
 Learn how to setup user input for numbers in Ink
 
@@ -29,7 +31,7 @@ Well...I was trying to port the original [BASIC version of Oregon Trail](https:/
 
 ## Scripting Digits in Ink
 The basic idea is that to support numeric input we need to afford at least 10 choices, one for each digit from 0 to 9. This is quite easy to do.
-```
+```ink
 -> choose_digit
 === choose_digit
 VAR choice = 0
@@ -60,7 +62,7 @@ VAR choice = 0
 The above is an infinite loop of letting us pick digits but it does nothing with them. In order to concatenate them into a single number, we can do a few things. Let's first take a look at what I did for Oregon Trail.
 
 Oregon Trail did not really use numbers that were greater than 1000 so I was able to take some shortcuts by assuming we could only input numbers with 3 digits. 
-```
+```ink
 === pick_number(ref num)
 ~ num = 0
 Choose Digit in the Hundredth's place
@@ -84,7 +86,7 @@ In the above, if we chose `9`, `6` and `3`, we would compute `(9 * 100) + (6 * 1
 
 But what if we couldn't control the digit count? This means we would need to support digit input much like a calculator where each digit gets shifted to the left when a new one is chosen. We could use string concatentation to accomplish this. The code below is similar but we have a new choice for concluding the input (RETURN). 
 
-```
+```ink
 VAR num = 0
 
 -> choose_digit_string
@@ -123,7 +125,7 @@ The problem with this method is that we're making a string which cannot be conve
 
 Basically, we end up writing an Ink script that's similar to `choose_digit` and `choose_digit_string` - except to concatenate we multiply the current number by 10 and add the choice value to it. The result looks like this.
 
-```
+```ink
 VAR just_a_number = 0
 
 -> pick_number(just_a_number) ->
@@ -170,7 +172,7 @@ VAR choice = 0
 
 Of course there's a problem in this script and it becomes apparent if you pick the number `2147483647` which is valid but that increment blows it past the maximum integer value and circles around to `-2147483648`. We could ignore this or we could early-out if the number gets bigger than a desired value. Something like this could do:
 
-```
+```ink
 - >> Chose: {choice} <> 
   ~ num = num * 10 + choice
   Value: {num}
@@ -208,7 +210,7 @@ SET X to 0
 
 It might looked complicated but if you squint, you can see how Ink diverts are similar to JUMPs. The above loop could look like this in Ink.
 
-```
+```ink
 VAR X = 0
 - (label_while)
   { X >= 10 : -> label_false }
@@ -246,7 +248,7 @@ Here we're taking advantage of labelled [Gathers](https://github.com/inkle/ink/b
 
 So using a loop like this, we can then use [Threads](https://github.com/inkle/ink/blob/master/Documentation/WritingWithInk.md#2-threads) to collect a bunch of choices. Basically `X is {X}` will be replaced by an Ink script that outputs choices. 
 
-```
+```ink
 VAR X = 0
 - (label_while)
   { X >= 10 : -> label_false }
@@ -265,7 +267,7 @@ VAR X = 0
 
 The above outputs `Input 0` to `Input 9` and can now be shoved into the Ink script we wrote in the previous section (with some modifications).
 
-```
+```ink
 VAR choice = 0
 VAR X = 0
 === choose_digit(ref num)

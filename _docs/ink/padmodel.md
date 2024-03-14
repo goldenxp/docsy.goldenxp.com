@@ -5,6 +5,8 @@ tags:
 description: How to setup a Pleasure-Arousal-Dominance model in Ink
 ---
 
+{% include ink.html %}
+
 # Mapping a PAD Model in Ink
 Learn two methods of setting up character emotional states in Ink
 
@@ -29,13 +31,13 @@ Unfortunately, at the time of writing this article, Ink does not support bitwise
 
 So what we'll do is use an Ink list to define each state; each state will have a specific decimal value that's the binary equivalent of 0 to 7. This sentence might make more sense if you look at the following list declaration.
 
-```
+```ink
 LIST State = Bored=000, Disdainful=001, Anxious=010,  Hostile=011, Docile=100, Relaxed=101, Dependent=110, Exuberant=111
 ```
 
 Essentially, 0/1 values are negative/positive while the Hundredths, Tenths and Units place are Pleasure, Arousal and Dominance axes. Now, with simple arithmetic, we can toggle sub-states with addition or subtraction of 100, 10 or 1 for Pleasure, Arousal or Dominance, respectively. We can wrap these in functions for convenient usage. A potential setup can look like this.
 
-```
+```ink
 LIST State = Bored=000, Disdainful=001, Anxious=010,  Hostile=011, Docile=100, Relaxed=101, Dependent=110, Exuberant=111
 
 // CONSTs for consistency
@@ -73,8 +75,10 @@ CONST D = "dominance"
 }
 ~return State(val)
 ```
+
 If you change the CONSTs to the placement numeric values determined in the switch case in `toggle_state`, the script can be simplified further.
-```
+
+```ink
 // CONSTs for consistency
 CONST P = 100
 CONST A = 10
@@ -95,14 +99,14 @@ CONST D = 1
 ```
 
 Now, if a character was in a Bored state and was stimulated, they can now become Anxious.
-```
+```ink
 VAR player_mood = Bored
 ~ player_mood = toggle_arousal( player_mood )
 The player is now { player_mood } // outputs: Anxious 
 ```
 Of course, there's nothing stopping us from doing a direct assigment but the ability to toggle the different axes can enable interesting forms of dynamic storytelling. Here's a trivial example of visiting an angry shopkeeper. The intro and outro change based on Pleasure.  
 
-```
+```ink
 VAR seller_mood = Hostile
 -> shop
 === shop
@@ -127,7 +131,7 @@ Basically, we need to express each axis as if it were a slider as opposed to a c
 
 While it might be better to delegate this to the external game engine, it is possible to achieve this in Ink using multiple lists. This is what it could look like.
 
-```
+```ink
 LIST Pleasure = Unpleasant, PartUnpleasant, PartPleasant, Pleasant
 
 LIST Arousal = Unaroused, PartUnaroused, PartAroused, Aroused
@@ -137,7 +141,7 @@ LIST Dominance = Submissive, PartSubmissive, PartDominant, Dominant
 
 It is vital that each dimensional list have the same number of items. The above declaration allows for 64 possible emotions but we could dial it down to 3 per dimension and have 27 instead. We can define some emotional states as variables; each variable would be a combination of a single value from each dimensional list. These can be treated like presets and used for comparisons later on. 
 
-```
+```ink
 VAR Boredom = (PartUnpleasant, PartUnaroused, PartSubmissive)
 VAR Depression = (Unpleasant, Unaroused, Submissive)
 VAR Anger = (Unpleasant, Aroused, Dominant)
@@ -147,7 +151,7 @@ VAR Fear = (Unpleasant, Aroused, Submissive)
 
 Now, each character can have a single list variable to express their emotional state. We can set these values using the predefined list variables but we likely won't have all 64 emotions defined as unique variables. As mentioned, this doesn't scale; instead we should rely on the three values stored within. We can do this with contains/intersection checks.
 
-```
+```ink
 VAR player_state = ()
 ~ player_state = Boredom
 { player_state has PartUnpleasant : You don't feel so good. }
@@ -157,7 +161,7 @@ VAR player_state = ()
 
 You can modify emotional states in many ways but care must be taken to not allow multiple values from the same list. It is better to use functions that can sanitize the list variables. Here's an example.
 
-```
+```ink
 You drink some coffee.
 ~ IncreasePleasure(player_state)
 You go out for a walk.

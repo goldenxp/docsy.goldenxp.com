@@ -5,6 +5,8 @@ tags:
 description: Documenting a primitive attempt at Procedural Narratives in Ink
 ---
 
+{% include ink.html %}
+
 # Ink Text Generation with Context-Free Grammar
 Learn about Context-Free Grammar and how to implement it in Ink 
 
@@ -15,7 +17,7 @@ Detailed info can be found here: <https://en.wikipedia.org/wiki/Context-free_gra
 
 ## Implementation
 Thanks to shuffles in Ink, implementing CFG variables is quite trivial.
-```
+```ink
 VAR animal = ""
 ~ animal = "{~bat|cat|dog}"
 The {animal} is good.
@@ -35,7 +37,7 @@ Text is generated from a starting variable which we never see in its original fo
 <svg xmlns="http://www.w3.org/2000/svg" id="svg99" style="width:600px;height:450px" version="1.1" viewBox="0 0 600 450"><style id="style2">text{text-anchor:middle;font-size:small;font-weight:700;fill:#000}line,rect{stroke:#000}rect{stroke-width:1;fill:#241f1c}line{stroke-width:.5;opacity:.5;stroke-dasharray:3,2}</style><defs id="defs9"><marker id="arrowHead" markerHeight="15" markerUnits="strokeWidth" markerWidth="15" orient="auto" preserveAspectRatio="none" viewBox="-10 -5 10 10"><path id="path6" d="M-10-5 0 0l-10 5z"/></marker></defs><g id="g97"><rect width="119.899" height="54.416" x="239.089" y="17.443" rx="7.932" ry="7.932" style="fill:#fc0"/><text x="299.961" y="17.443"><tspan id="tspan13" x="299.961" dy="32.378">Sentence</tspan></text><rect width="119.899" height="54.416" x="95.21" y="137.343" rx="7.932" ry="7.932" style="fill:#fc0"/><text x="155.16" y="137.343"><tspan id="tspan19" x="155.16" dy="32.378">NounPhrase</tspan></text><line x1="279.671" x2="155.16" y1="71.859" y2="137.343" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="383.89" y="137.343" rx="7.932" ry="7.932" style="fill:#fc0"/><text x="443.84" y="137.343"><tspan id="tspan27" x="443.84" dy="32.378">VerbPhrase</tspan></text><line x1="319.329" x2="443.84" y1="71.859" y2="137.343" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="23.271" y="257.242" rx="7.932" ry="7.932" style="fill:#fc0"/><text x="83.22" y="257.242"><tspan id="tspan35" x="83.22" dy="32.378">Determiner</tspan></text><line x1="134.869" x2="83.22" y1="191.758" y2="257.242" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="167.15" y="257.242" rx="7.932" ry="7.932" style="fill:#fc0"/><text x="227.099" y="257.242"><tspan id="tspan43" x="227.099" dy="32.378">Noun</tspan></text><line x1="175.451" x2="227.099" y1="191.758" y2="257.242" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="311.951" y="257.242" rx="7.932" ry="7.932" style="fill:#fc0"/><text x="371.901" y="257.242"><tspan id="tspan51" x="371.901" dy="32.378">Verb</tspan></text><line x1="423.549" x2="371.901" y1="191.758" y2="257.242" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="455.83" y="257.242" rx="7.932" ry="7.932" style="fill:#fc0"/><text x="515.779" y="257.242"><tspan id="tspan59" x="515.779" dy="32.378">Adjective</tspan></text><line x1="464.131" x2="515.779" y1="191.758" y2="257.242" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="23.271" y="377.141" rx="7.932" ry="7.932" style="fill:#dde9af"/><text x="83.22" y="377.141" style="fill:green"><tspan id="tspan67" x="83.22" dy="32.378" style="fill:green">The</tspan></text><line x1="83.22" x2="83.22" y1="311.657" y2="377.141" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="167.15" y="377.141" rx="7.932" ry="7.932" style="fill:#dde9af"/><text x="227.099" y="377.141" style="fill:green"><tspan id="tspan75" x="227.099" dy="32.378" style="fill:green">dog</tspan></text><line x1="227.099" x2="227.099" y1="311.657" y2="377.141" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="311.951" y="377.141" rx="7.932" ry="7.932" style="fill:#dde9af"/><text x="371.901" y="377.141" style="fill:green"><tspan id="tspan83" x="371.901" dy="32.378" style="fill:green">is</tspan></text><line x1="371.901" x2="371.901" y1="311.657" y2="377.141" marker-end="url(#arrowHead)"/><rect width="119.899" height="54.416" x="455.83" y="377.141" rx="7.932" ry="7.932" style="fill:#dde9af"/><text x="515.779" y="377.141" style="fill:green"><tspan id="tspan91" x="515.779" dy="32.378" style="fill:green">good</tspan></text><line x1="515.779" x2="515.779" y1="311.657" y2="377.141" marker-end="url(#arrowHead)"/></g></svg>
 
 Below is the above implemented in Ink
-```
+```ink
 VAR Sentence    = ""
   VAR NounPhrase  = ""
     VAR Determiner  = ""
@@ -56,7 +58,7 @@ VAR Sentence    = ""
 ```
 Notice how the parse/syntax tree is flipped in Ink. When using expressions like this, we need to fetch the children first and work up to the root parent. We can wrap these expressions in functions to easily invoke them as many times as needed. Each function can fetch the necessary values and we won't have to worry about the correct order of substitution.
 
-```
+```ink
 {g_sentence()}
 {g_sentence()}
 {g_sentence()}
@@ -122,7 +124,7 @@ It's not exactly a compelling story but here's the thing. Our roots don't have t
 
 ## Application
 As stated in the intro, grammars are rule sets and we can set the rules as we please in order to produce the results we want. Here's an example of writing a narrative that is perhaps a bit more compelling.
-```
+```ink
 -> story
 === story
 ~ temp Job = "{~librarian|soldier|blacksmith}"
