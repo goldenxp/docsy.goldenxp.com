@@ -27,6 +27,7 @@ While reading the official documentation, you might get overwhelmed by Inkle's u
 * [Ink Text Generation with Context-Free Grammar]({{ site.baseurl }}/ink/contextfreegrammar)
 * [Character Pronouns in Ink]({{ site.baseurl }}/ink/characterpronouns)
 * [Tabular Data in Ink]({{ site.baseurl }}/ink/tabulardata)
+* [Recursive Functions in Ink]({{ site.baseurl }}/ink/functionrecursion)
 
 ## Lingo
 
