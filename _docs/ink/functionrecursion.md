@@ -2,7 +2,7 @@
 title: Recursive Functions in Ink
 tags: 
  - ink
-description: Set up and use comma-separated values in Ink
+description: Iteration is not the only way! 
 ---
 
 {% include ink.html %}
