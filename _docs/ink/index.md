@@ -28,6 +28,7 @@ While reading the official documentation, you might get overwhelmed by Inkle's u
 * [Character Pronouns in Ink]({{ site.baseurl }}/ink/characterpronouns)
 * [Tabular Data in Ink]({{ site.baseurl }}/ink/tabulardata)
 * [Recursive Functions in Ink]({{ site.baseurl }}/ink/functionrecursion)
+* [Testing Strategies using Inky Web Export]({{ site.baseurl }}/ink/testinginkweb)
 
 ## Lingo
 
